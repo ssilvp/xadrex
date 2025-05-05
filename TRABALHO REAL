@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+// Desafio de Xadrez - MateCheck
+
+// Constantes de movimentação
+#define MOV_BISPO 5
+#define MOV_TORRE 5
+#define MOV_RAINHA 8
+
+// Função recursiva para movimento do Bispo
+void moverBispo(int passo) {
+    if (passo == 0) return;
+    printf("Cima\n");
+    printf("Direita\n");
+    moverBispo(passo - 1);
+}
+
+int main() {
+    // Nível Novato - Movimentação das Peças
+
+    // Torre - direita (for)
+    printf("Movimento da Torre:\n");
+    for (int i = 0; i < MOV_TORRE; i++) {
+        printf("Direita\n");
+    }
+
+    // Rainha - esquerda (while)
+    printf("\nMovimento da Rainha:\n");
+    int r = 0;
+    while (r < MOV_RAINHA) {
+        printf("Esquerda\n");
+        r++;
+    }
+
+    // Bispo - diagonal (recursivo)
+    printf("\nMovimento do Bispo:\n");
+    moverBispo(MOV_BISPO);
+
+    // Nível Aventureiro - Cavalo em L (loops aninhados)
+    printf("\nMovimento do Cavalo:\n");
+    int dx[] = {1, 2, -1, -2, 1, 2, -1, -2};
+    int dy[] = {2, 1, 2, 1, -2, -1, -2, -1};
+    for (int i = 0; i < 8; i++) {
+        // Verifica se o movimento é válido (simples verificação)
+        if (dx[i] == 0 || dy[i] == 0) continue;
+        printf("Movimento em L: (%d, %d)\n", dx[i], dy[i]);
+    }
+
+    // Nível Mestre - Cavalo com loops e break/continue
+    printf("\nCavalo - Loop Avançado:\n");
+    for (int x = -2; x <= 2; x++) {
+        for (int y = -2; y <= 2; y++) {
+            if (x == 0 || y == 0) continue;  // pula movimentos inválidos
+            if ((x * x + y * y) == 5) {
+                printf("L válido: (%d, %d)\n", x, y);
+            }
+            if ((x * x + y * y) > 5) break; // exemplo de break
+        }
+    }
+
+    return 0;
+}
